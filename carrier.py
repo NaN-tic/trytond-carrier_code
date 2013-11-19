@@ -13,3 +13,14 @@ class Carrier:
     __name__ = 'carrier'
     code = fields.Char('Code')
 
+    def get_rec_name(self, name):
+        if self.code:
+            return '%s - %s' % (
+                    self.party.rec_name,
+                    self.code,
+                    )
+        else:
+            return '%s - %s' % (
+                    self.party.rec_name,
+                    self.carrier_product.rec_name,
+                    )
