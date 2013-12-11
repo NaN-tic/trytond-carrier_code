@@ -9,18 +9,21 @@ __metaclass__ = PoolMeta
 
 
 class Carrier:
-    'Carrier'
     __name__ = 'carrier'
+    description = fields.Char('Description')
     code = fields.Char('Code')
 
     def get_rec_name(self, name):
-        if self.code:
-            return '%s - %s' % (
-                    self.party.rec_name,
+        if self.code and self.description:
+            return '[%s] - %s' % (
                     self.code,
+                    self.description,
                     )
-        else:
-            return '%s - %s' % (
-                    self.party.rec_name,
-                    self.carrier_product.rec_name,
+        if self.description:
+            return '%s' % (
+                    self.description,
                     )
+        return '%s - %s' % (
+                self.party.rec_name,
+                self.carrier_product.rec_name,
+                )
