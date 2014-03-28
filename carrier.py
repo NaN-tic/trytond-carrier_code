@@ -13,6 +13,12 @@ class Carrier:
     description = fields.Char('Description')
     code = fields.Char('Code')
 
+    @classmethod
+    def __setup__(cls):
+        super(Carrier, cls).__setup__()
+        cls._order.insert(0, ('description', 'ASC'))
+        cls._order.insert(1, ('party', 'ASC'))
+
     def get_rec_name(self, name):
         if self.code and self.description:
             return '[%s] - %s' % (
