@@ -17,7 +17,7 @@ class Carrier:
     @classmethod
     def __setup__(cls):
         super(Carrier, cls).__setup__()
-        cls._order.insert(0, ('description', 'ASC'))
+        cls._order.insert(0, ('sequence', 'ASC'))
         cls._order.insert(1, ('party', 'ASC'))
 
     @staticmethod
