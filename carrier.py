@@ -12,12 +12,17 @@ class Carrier:
     __name__ = 'carrier'
     description = fields.Char('Description')
     code = fields.Char('Code')
+    sequence = fields.Integer('Sequence')
 
     @classmethod
     def __setup__(cls):
         super(Carrier, cls).__setup__()
         cls._order.insert(0, ('description', 'ASC'))
         cls._order.insert(1, ('party', 'ASC'))
+
+    @staticmethod
+    def default_sequence():
+        return 1
 
     def get_rec_name(self, name):
         if self.code and self.description:
