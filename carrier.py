@@ -10,6 +10,7 @@ __metaclass__ = PoolMeta
 
 class Carrier:
     __name__ = 'carrier'
+    active = fields.Boolean('Active')
     description = fields.Char('Description')
     code = fields.Char('Code')
     sequence = fields.Integer('Sequence')
@@ -19,6 +20,10 @@ class Carrier:
         super(Carrier, cls).__setup__()
         cls._order.insert(0, ('sequence', 'ASC'))
         cls._order.insert(1, ('party', 'ASC'))
+
+    @staticmethod
+    def default_active():
+        return True
 
     @staticmethod
     def default_sequence():
