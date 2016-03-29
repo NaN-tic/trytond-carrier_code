@@ -5,10 +5,10 @@ from trytond.model import fields
 from trytond.pool import PoolMeta
 
 __all__ = ['Carrier']
-__metaclass__ = PoolMeta
 
 
 class Carrier:
+    __metaclass__ = PoolMeta
     __name__ = 'carrier'
     active = fields.Boolean('Active')
     description = fields.Char('Description')
