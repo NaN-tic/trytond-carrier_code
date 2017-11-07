@@ -30,16 +30,25 @@ class Carrier:
         return 1
 
     def get_rec_name(self, name):
-        if self.code and self.description:
-            return '[%s] - %s' % (
-                    self.code,
-                    self.description,
-                    )
+        rec_name = []
+        if self.code:
+            rec_name.append(self.code)
         if self.description:
-            return '%s' % (
-                    self.description,
-                    )
-        return '%s - %s' % (
-                self.party.rec_name,
-                self.carrier_product.rec_name,
-                )
+            rec_name.append(self.description)
+        if not rec_name:
+            rec_name.append(self.party.rec_name)
+            rec_name.append(self.carrier_product.rec_name)
+        return ' - '.join(rec_name)
+
+    @classmethod
+    def search_rec_name(cls, name, clause):
+        # not call super()
+        if clause[1].startswith('!') or clause[1].startswith('not '):
+            bool_op = 'AND'
+        else:
+            bool_op = 'OR'
+        return [bool_op,
+            ('code',) + tuple(clause[1:]),
+            ('description',) + tuple(clause[1:]),
+            ('party.name',) + tuple(clause[1:]),
+            ]
