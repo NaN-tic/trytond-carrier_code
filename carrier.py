@@ -7,9 +7,8 @@ from trytond.pool import PoolMeta
 __all__ = ['Carrier']
 
 
-class Carrier(sequence_ordered()):
+class Carrier(sequence_ordered(), metaclass=PoolMeta):
     __name__ = 'carrier'
-    __metaclass__ = PoolMeta
     active = fields.Boolean('Active')
     description = fields.Char('Description')
     code = fields.Char('Code')
