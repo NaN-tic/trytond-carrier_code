@@ -9,7 +9,6 @@ __all__ = ['Carrier']
 
 class Carrier(sequence_ordered(), metaclass=PoolMeta):
     __name__ = 'carrier'
-    active = fields.Boolean('Active')
     description = fields.Char('Description')
     code = fields.Char('Code')
 
@@ -17,10 +16,6 @@ class Carrier(sequence_ordered(), metaclass=PoolMeta):
     def __setup__(cls):
         super(Carrier, cls).__setup__()
         cls._order.insert(1, ('party', 'ASC'))
-
-    @staticmethod
-    def default_active():
-        return True
 
     def get_rec_name(self, name):
         rec_name = []
